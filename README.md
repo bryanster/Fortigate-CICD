@@ -43,3 +43,14 @@ on the ssh session run the command dont forgot to replace the < url > for the co
 
 this wil download the package on the agent install page(devops):  
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/newagent.png)
+
+on the configure.sh
+accept the license
+for the server url use : https://dev.azure.com/< yourorg name >
+in my case it is: https://dev.azure.com/bryan0110/
+
+for the personal access token you need te generate one everything
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pat.png)
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/agent.png)
+
