@@ -1,0 +1,5 @@
+#the device inventory
+[fortigate]
+192.168.2.240
+[fortigate:vars]
+ansible_network_os=fortinet.fortios.fortios

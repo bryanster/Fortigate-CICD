@@ -1,0 +1,26 @@
+
+trigger:
+- staging
+
+pool:
+  name: "test"
+
+steps:
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'yeet'
+    KeyVaultName: 'fortitools'
+    RunAsPreJob: true
+    
+- task: CmdLine@2
+  inputs:
+    script: 'ansible-galaxy collection install -f fortinet.fortios:1.1.6'
+
+- task: CmdLine@2
+  inputs:
+    script: ansible-playbook fortigate.yaml --inventory ./hosts --extra-vars 'ansible_password=$(test) ansible_user=admin' --syntax-check
+
+- task: CmdLine@2
+  inputs:
+    script: ansible-playbook fortigate.yaml --inventory ./hosts --extra-vars 'ansible_password=$(test) ansible_user=admin' --check
+

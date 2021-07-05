@@ -1,0 +1,591 @@
+#this looks at the host file in this folder
+- hosts: fortigate
+  connection: httpapi
+  collections:
+  - fortinet.fortios
+  vars:
+   vdom: "root"
+   ansible_httpapi_use_ssl: yes
+   ansible_httpapi_validate_certs: no
+   ansible_httpapi_port: 443
+  tasks:
+   - name: Configure global attributes.
+     fortios_system_global:
+        vdom:  "{{ vdom }}"
+        system_global:
+            hostname: 'joostyeet'
+
+
+#setting up sdwan
+   - name: Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
+     ignore_errors: yes
+     fortios_system_virtual_wan_link:
+       vdom:  "{{ vdom }}"
+       system_virtual_wan_link:
+        members: 
+          -
+            comment: "created by ansible"
+            cost: "10"
+            interface: "wan1"
+            gateway: "192.168.2.1"
+            status: "enable"
+          -
+            comment: "created by anisble"
+            cost: "20"
+            interface: "wan2"
+            status: "enable"
+        health_check: 
+          - 
+            seq_num: "1"
+            name: "google"
+            protocol: "ping"
+            server: "8.8.8.8"
+            update_static_route: "enable"
+            members: 
+              - 
+                seq_num: "1"
+              - 
+                seq_num: "2"
+            
+#setting static routes
+   - name: Configure IPv4 static routing tables.
+     ignore_errors: yes
+     fortios_router_static:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      router_static:
+        comment: "created by ansible"
+        distance: "10"
+        dst: "0.0.0.0/0.0.0.0"
+        status: "enable"
+        virtual_wan_link: "enable"
+# configure anti-virus profiles
+   - name: Configure AntiVirus profiles.
+     fortios_antivirus_profile:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      antivirus_profile:
+        av_block_log: "enable"
+        av_virus_log: "enable"
+        cifs:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            emulator: "enable"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        comment: "created by ansible"
+        extended_log: "enable"
+        ftgd_analytics: "disable"
+        ftp:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            emulator: "enable"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        http:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            av_optimize: "disable"
+            content_disarm: "disable"
+            emulator: "enable"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        imap:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            content_disarm: "disable"
+            emulator: "enable"
+            executables: "default"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        mapi:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            emulator: "enable"
+            executables: "default"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        mobile_malware_db: "disable"
+        name: "example"
+        nntp:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            emulator: "enable"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        outbreak_prevention:
+            external_blocklist: "disable"
+            ftgd_service: "disable"
+        pop3:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            content_disarm: "disable"
+            emulator: "enable"
+            executables: "default"
+            options: "scan"
+            outbreak_prevention: "disabled"
+        scan_mode: "quick"
+        smtp:
+            archive_block: "encrypted"
+            archive_log: "encrypted"
+            content_disarm: "disable"
+            emulator: "enable"
+            executables: "default"
+            options: "scan"
+            outbreak_prevention: "disabled"
+#configure dns-filter profile
+   - name: Configure DNS domain filter profiles.
+     fortios_dnsfilter_profile:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      dnsfilter_profile:
+        block_action: "block"
+        block_botnet: "disable"
+        comment: "created by ansible"
+        ftgd_dns:
+            filters:
+             - 
+                action: "block"
+                category: "1"
+                id: "1"
+             - 
+                action: "block"
+                category: "3"
+                id: "3"
+             - 
+                action: "block"
+                category: "4"
+                id: "4"
+             - 
+                action: "block"
+                category: "5"
+                id: "5"
+             - 
+                action: "block"
+                category: "6"
+                id: "6"
+             - 
+                action: "block"
+                category: "12"
+                id: "12"
+             - 
+                action: "block"
+                category: "59"
+                id: "59"
+             - 
+                action: "block"
+                category: "62"
+                id: "62"
+             - 
+                action: "block"
+                category: "83"
+                id: "83"
+             - 
+                action: "block"
+                category: "2"
+                id: "2"
+             - 
+                action: "block"
+                category: "7"
+                id: "7"
+             - 
+                action: "block"
+                category: "8"
+                id: "8"
+             - 
+                action: "block"
+                category: "9"
+                id: "9"
+             - 
+                action: "block"
+                category: "11"
+                id: "11"
+             - 
+                action: "block"
+                category: "13"
+                id: "13"
+             - 
+                action: "block"
+                category: "14"
+                id: "14"
+             - 
+                action: "block"
+                category: "15"
+                id: "15"
+             - 
+                action: "block"
+                category: "16"
+                id: "16"
+             - 
+                action: "block"
+                category: "57"
+                id: "57"
+             - 
+                action: "block"
+                category: "63"
+                id: "63"
+             - 
+                action: "block"
+                category: "64"
+                id: "64"
+             - 
+                action: "block"
+                category: "65"
+                id: "65"
+             - 
+                action: "block"
+                category: "66"
+                id: "66"
+             - 
+                action: "block"
+                category: "67"
+                id: "67"
+             - 
+                action: "block"
+                category: "26"
+                id: "26"
+             - 
+                action: "block"
+                category: "61"
+                id: "61"
+             - 
+                action: "block"
+                category: "86"
+                id: "86"
+             - 
+                action: "monitor"
+                category: "0"
+                id: "0"
+            options: "error-allow"
+        log_all_domain: "enable"
+        name: "example"
+        safe_search: "disable"
+        sdns_domain_log: "enable"
+        sdns_ftgd_err_log: "enable" 
+#configure application filter profiles
+   - name: Configure application control lists.
+     fortios_application_list:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      application_list:
+        app_replacemsg: "disable"
+        comment: "created by ansible"
+        control_default_network_services: "disable"
+        deep_app_inspection: "enable"
+        entries:
+         -
+            category:
+             -
+                id:  "2"
+             - 
+                id:  "6"
+        extended_log: "enable"
+        name: "example"
+        options: "allow-dns"
+        other_application_action: "pass"
+        other_application_log: "disable"
+        unknown_application_action: "pass"
+        unknown_application_log: "disable"
+#creating web filter profile
+   - name: Configure Web filter profiles.
+     fortios_webfilter_profile:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      webfilter_profile:
+        name: "example"
+        comment: "created by ansible"
+        extended_log: "enable"
+        web_ftgd_err_log: "enable"
+        ftgd_wf:
+          options: "error-allow"
+          filters:
+            - 
+                action: "block"
+                category: "1"
+                id: "1"
+            - 
+               action: "block"
+               category: "3"
+               id: "3"
+            - 
+               action: "block"
+               category: "4"
+               id: "4"
+            - 
+               action: "block"
+               category: "5"
+               id: "5"
+            - 
+               action: "block"
+               category: "6"
+               id: "6"
+            - 
+               action: "block"
+               category: "12"
+               id: "12"
+            - 
+               action: "block"
+               category: "59"
+               id: "59"
+            - 
+               action: "block"
+               category: "62"
+               id: "62"
+            - 
+               action: "block"
+               category: "83"
+               id: "83"
+            - 
+               action: "block"
+               category: "2"
+               id: "2"
+            - 
+               action: "block"
+               category: "7"
+               id: "7"
+            - 
+               action: "block"
+               category: "8"
+               id: "8"
+            - 
+               action: "block"
+               category: "9"
+               id: "9"
+            - 
+               action: "block"
+               category: "11"
+               id: "11"
+            - 
+               action: "block"
+               category: "13"
+               id: "13"
+            - 
+               action: "block"
+               category: "14"
+               id: "14"
+            - 
+               action: "block"
+               category: "15"
+               id: "15"
+            - 
+               action: "block"
+               category: "16"
+               id: "16"
+            - 
+               action: "block"
+               category: "57"
+               id: "57"
+            - 
+               action: "block"
+               category: "63"
+               id: "63"
+            - 
+               action: "block"
+               category: "64"
+               id: "64"
+            - 
+               action: "block"
+               category: "65"
+               id: "65"
+            - 
+               action: "block"
+               category: "66"
+               id: "66"
+            - 
+               action: "block"
+               category: "67"
+               id: "67"
+            - 
+                action: "block"
+                category: "26"
+                id: "26"
+            - 
+               action: "block"
+               category: "61"
+               id: "61"
+            - 
+               action: "block"
+               category: "86"
+               id: "86"
+            - 
+               action: "monitor"
+               category: "0"
+               id: "0"
+#creating vlans
+   - name: vlan servers.
+     fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        vdom: "root"
+        interface: "lan1"
+        type: "vlan"
+        vlanid: "202"
+        ip: "10.1.1.1 255.255.255.0"
+        allowaccess: ['https', 'ping']
+        name: "server"
+   - name: vlan office.
+     fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        vdom: "root"
+        interface: "lan1"
+        type: "vlan"
+        vlanid: "101"
+        ip: "10.1.2.1 255.255.255.0"
+        allowaccess: ['https', 'ping']
+        name: "office"
+   - name: vlan guest.
+     fortios_system_interface:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_interface:
+        vdom: "root"
+        interface: "lan1"
+        type: "vlan"
+        vlanid: "302"
+        ip: "192.168.222.1 255.255.255.0"
+        allowaccess: ['https', 'ping']
+        name: "guest"
+#adding zones
+   - name: Configure zone trusted
+     fortios_system_zone:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_zone:
+        interface:
+         -
+            interface_name: "office"
+         - 
+            interface_name: "server"
+        intrazone: "allow"
+        name: "Trusted"
+   - name: Configure zone restricted
+     fortios_system_zone:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_zone:
+        interface:
+         -
+            interface_name: "guest"
+        intrazone: "deny"
+        name: "Restricted"
+#configure dhcp servers 
+   - name: Configure DHCP server for server network.
+     fortios_system_dhcp_server:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_dhcp_server:
+        ip_range:
+         -
+            end_ip: "10.1.1.250"
+            id:  "101"
+            start_ip: "10.1.1.245"
+        status: "enable"
+        interface: "server"
+        id: "101"
+        default_gateway: "10.1.1.1"
+        dns_server1: "8.8.8.8"
+        netmask: "255.255.255.0"
+        server_type: "regular"
+   - name: Configure DHCP server for office network.
+     fortios_system_dhcp_server:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_dhcp_server:
+        ip_range:
+         -
+            end_ip: "10.1.2.250"
+            id:  "102"
+            start_ip: "10.1.2.100"
+        status: "enable"
+        interface: "server"
+        id: "102"
+        default_gateway: "10.1.2.1"
+        dns_server1: "8.8.8.8"
+        netmask: "255.255.255.0"
+        server_type: "regular"
+   - name: Configure DHCP server for guest network.
+     fortios_system_dhcp_server:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      system_dhcp_server:
+        ip_range:
+         -
+            end_ip: "192.168.222.250"
+            id:  "103"
+            start_ip: "192.168.222.100"
+        status: "enable"
+        interface: "server"
+        id: "103"
+        default_gateway: "192.168.222.1"
+        dns_server1: "8.8.8.8"
+        netmask: "255.255.255.0"
+        server_type: "regular"
+
+#configure default internet policy
+   - name: Configure IPv4 internet policy for trusted.
+     fortios_firewall_policy:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      firewall_policy:
+        name: "internet out"
+        policyid: "101"
+        action: "accept"
+        inspection_mode: "flow"
+        utm_status: "enable"
+        dstaddr: 
+          - 
+            name: "all"
+        srcaddr:
+          - 
+            name: "all"
+        nat: "enable"
+        service: 
+          -
+            name: "ALL"
+        srcintf:
+          - name: "Trusted"
+        dstintf:
+          - name: "virtual-wan-link"
+        schedule: "always"
+        ssl_ssh_profile: "certificate-inspection"
+        av_profile: "example"
+        webfilter_profile:  "example"
+        dnsfilter_profile: "example"
+        #ips_sensor:
+        application_list: "example"
+        status: "enable"
+   - name: Configure IPv4 internet policy for restricted.
+     fortios_firewall_policy:
+      vdom:  "{{ vdom }}"
+      state: "present"
+      firewall_policy:
+        name: "internet outr"
+        policyid: "102"
+        action: "accept"
+        inspection_mode: "flow"
+        utm_status: "enable"
+        dstaddr: 
+          - 
+            name: "all"
+        srcaddr:
+          - 
+            name: "all"
+        nat: "enable"
+        service: 
+          -
+            name: "ALL"
+        srcintf:
+          - name: "Restricted"
+        dstintf:
+          - name: "virtual-wan-link"
+        schedule: "always"
+        ssl_ssh_profile: "certificate-inspection"
+        av_profile: "example"
+        webfilter_profile:  "example"
+        dnsfilter_profile: "example"
+        #ips_sensor:
+        application_list: "example"
+        status: "enable"
