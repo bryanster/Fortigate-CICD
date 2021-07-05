@@ -1,14 +1,18 @@
-# ansible network automation
-for an automated install of fortigate config i build this ansible [playbook](https://github.com/bryanster/fortigate_ansible/blob/master/fortigate.yaml)  
-  
-  
-requirements:
+# Fortigate-CICD
+this is a infrastructure as code implementation using Fortigate + Ansible + Azure devops pipline.
+## how do i need?
+for this implementation the following things are needed:
 
-- ansible 2.9
-- fortinet.fortios
+- a azure devops acount 
+- a azure keyvault
+- a ubuntu 20.04 server(can be hosted in azure or localy)
+- credentials for the fortigate firewall
 
-on the install of the fortigate galaxy check [versioning](https://ansible-galaxy-fortios-docs.readthedocs.io/en/latest/version.html)
-so you use the correct version for you fortios version
-my playbook are build on 6.2.5 and is tested working  
-this is a pretty simple configuration to serve as an example
-this configuration is pushed using an azure pipeline
+## how do i set this up?
+for the setup we use a few steps to configure everything.
+
+
+### azure keyvault 
+first we start with the azure keyvault , in the keyvault we store the creentails that will be used te access the fortigate.  
+the setup is simple. createe a new resource group or use an existing.  
+then name the keyvault.
