@@ -53,4 +53,16 @@ for the personal access token you need te generate one everything
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pat.png)
 
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/agent.png)
+give the name of you agent pool you created earlier;
+
+use the default working directory: _work
+
+start the agent a
+
+        ./run.sh
+
+
+under the agent pool it should be online:
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/agentpool.png)
 
