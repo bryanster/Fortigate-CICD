@@ -16,3 +16,4 @@ for the setup we use a few steps to configure everything.
 first we start with the azure keyvault , in the keyvault we store the creentails that will be used te access the fortigate.  
 the setup is simple. createe a new resource group or use an existing.  
 then name the keyvault.
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/keyvault1.png)
