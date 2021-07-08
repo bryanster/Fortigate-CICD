@@ -136,3 +136,5 @@ run the pipline for the first time it will give an message that additional acces
 run the pipeline again and it should work.
 
 
+## how does it work?
+azure devops triggers the pipline for you everytime you make a change to the Main/Master branch the pipline will rollout the ansible playbook over the host in in host file the ansible uses the Rest api of fortigate to do all the configuration as designed in the playbooks taskt
