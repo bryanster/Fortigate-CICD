@@ -33,6 +33,9 @@ clone this repository to use as a template
 
 ### setup Pipeline agent
 start by installing a Ubuntu 20.04 server after install.
+this is a default install ontop of that you need te install ansible on the host i recommend following the ansible documentation:
+
+[LINK](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)  
 after installing ubuntu 20.04 we wil install the pipline agent.  
 under the agent pool go to new agent there we wil install a linux agent X64.     
 ssh into your server  
@@ -74,3 +77,32 @@ for security purposes i add an new acount for de Azure pipline with trusted host
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/fgtuser.png)
 
 by doing this you shield the acount from being used other then by the pipeline
+
+we then add the password to the Azure keyvault add tthem as a secret to the
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/secret.png)
+
+### azure pipline configuration
+for the pipline config you can copy most of the Yaml file but you need te re-add your keyvault start by removing the keyvault part:
+
+```
+- task: AzureKeyVault@1
+  inputs:
+    azureSubscription: 'yeet'
+    KeyVaultName: 'fortitools'
+    RunAsPreJob: true
+    
+```
+can be removed from the yaml file  
+then add an azure keyvault using the assistent:  
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline1.png)
+
+authorize for the subscription your keyvault is under:  
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline2.png)
+
+select your keyvault you can keep te filter on *:
+
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline3.png)
