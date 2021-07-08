@@ -22,6 +22,18 @@ then name the keyvault.
 the correct rights needed for the pipline to read the passwords wil be added when we setup the pipeline
 for now choose *review + create*
 
+after creating the keyvault add a access policy under the access policy pane create a new access policy select secret managment:  
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/keyvault2.png)
+
+select principal en kies voor de Repository  
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/keyvault3.png)
+ 
+add the policy dont forget to save the policy:
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/keyvault4.png)  
+
+
 ### setting up the project azure devops
 i like to have 1 project containing all the managed network repositories
 once the project is created i prefer to turn of all the unneeded settings in the project.   
@@ -116,3 +128,11 @@ Change the ansible password variable to the name of your secret in the keyvault.
 save the pipline but dont run it yet.
 for the pipline to function you should change the ip in the hosts file to your fortigate.   
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/host.png)
+
+run the pipline for the first time it will give an message that additional acces is needed press view then permit this access  
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline5.png)  
+
+
+run the pipeline again and it should work.
+
+
