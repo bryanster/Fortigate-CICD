@@ -106,3 +106,13 @@ select your keyvault you can keep te filter on *:
 
 
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline3.png)
+
+move the keyvault part to the fromt of the tasks.
+after re-adding the keyvault make sure your pool name is set to the agent pool created earlier.
+
+Change the ansible password variable to the name of your secret in the keyvault.  
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline4.png)  
+
+save the pipline but dont run it yet.
+for the pipline to function you should change the ip in the hosts file to your fortigate.   
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/host.png)
