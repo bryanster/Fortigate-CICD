@@ -108,29 +108,29 @@ for the pipline config you can copy most of the Yaml file but you need te re-add
 can be removed from the yaml file  
 then add an azure keyvault using the assistent:  
 
-![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline1.png)
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipeline1.png)
 
 authorize for the subscription your keyvault is under:  
 
-![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline2.png)
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipeline2.png)
 
 select your keyvault you can keep te filter on *:
 
 
-![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline3.png)
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipeline3.png)
 
 move the keyvault part to the fromt of the tasks.
 after re-adding the keyvault make sure your pool name is set to the agent pool created earlier.
 
 Change the ansible password variable to the name of your secret in the keyvault.  
-![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline4.png)  
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipeline4.png)  
 
 save the pipline but dont run it yet.
 for the pipline to function you should change the ip in the hosts file to your fortigate.   
 ![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/host.png)
 
 run the pipline for the first time it will give an message that additional acces is needed press view then permit this access  
-![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipline5.png)  
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/pipeline5.png)  
 
 
 run the pipeline again and it should work.
