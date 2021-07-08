@@ -69,3 +69,8 @@ under the agent pool it should be online:
 
 ### add credentials to the keyvault
 for security purposes i add an new acount for de Azure pipline with trusted hosts restricted to the azure pipline agent
+
+
+![alt text](https://github.com/bryanster/Fortigate-CICD/blob/main/docs/Pictures/fgtuser.png)
+
+by doing this you shield the acount from being used other then by the pipeline
