@@ -13,7 +13,7 @@
      fortios_system_global:
         vdom:  "{{ vdom }}"
         system_global:
-            hostname: 'joostyeet'
+            hostname: 'fw01'
 
 
 #setting up sdwan
